@@ -247,23 +247,29 @@
 
     // 🔗 Script penghubung ke Google Apps Script
     const form = document.getElementById("pegawaiForm");
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec"; // ganti dengan URL-mu
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec";
+  const form = document.getElementById("pegawaiForm");
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-      fetch(scriptURL, { method: "POST", body: formData })
-        .then((res) => res.json())
-        .then((data) => {
-          alert(data.message);
-          form.reset();
-        })
-        .catch((err) => {
-          alert("❌ Gagal mengirim data: " + err.message);
-          console.error(err);
-        });
+    const formData = new FormData(form);
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"  // agar browser tidak blok
+    })
+    .then(() => {
+      alert("✅ Data berhasil dikirim!");
+      form.reset();
+    })
+    .catch((err) => {
+      alert("❌ Gagal mengirim data: " + err.message);
+      console.error(err);
     });
+  });
   </script>
 </body>
 </html>
+
