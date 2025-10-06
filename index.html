@@ -34,6 +34,7 @@
       font-weight: bold;
       line-height: 1.4;
     }
+    /* Tulisan berjalan */
     .marquee {
       background: #28a745;
       color: #fff;
@@ -102,7 +103,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="overlay">
     <div class="header">
@@ -219,70 +219,33 @@
   </div>
 
   <script>
-    // Tampilkan / sembunyikan eselon
     const statusAsn = document.getElementById("statusasn");
     const eselonGroup = document.getElementById("eselonGroup");
     function toggleEselon() {
-      eselonGroup.style.display = (statusAsn.value === "PNS") ? "block" : "none";
+      if (statusAsn.value === "PNS") eselonGroup.style.display = "block";
+      else eselonGroup.style.display = "none";
     }
     statusAsn.addEventListener("change", toggleEselon);
     toggleEselon();
 
-    // === KONEKSI KE GOOGLE APPS SCRIPT ===
-    const scriptURL = "https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec";
     const form = document.getElementById("pegawaiForm");
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec";
 
-    form.addEventListener("submit", e => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      fetch(scriptURL, { method: "POST", body: new FormData(form) })
-        .then(res => res.json())
-        .then(data => {
-          if (data.result === "success") {
-            alert("✅ Data berhasil disimpan ke Spreadsheet!");
+      const formData = new FormData(form);
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.status === "success") {
+            alert("✅ Data berhasil disimpan!");
             form.reset();
-            toggleEselon();
           } else {
-            alert("⚠️ Gagal menyimpan: " + data.message);
+            alert("⚠️ Gagal: " + res.message);
           }
         })
-        .catch(err => alert("❌ Terjadi kesalahan: " + err.message));
+        .catch((error) => alert("❌ Terjadi kesalahan: " + error.message));
     });
   </script>
 </body>
 </html>
-
-
-<script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec';
-
-  document.getElementById("pegawaiForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const msg = document.getElementById("msg");
-
-    msg.innerText = "⏳ Menyimpan data...";
-
-    try {
-      const res = await fetch(SCRIPT_URL, {
-        method: "POST",
-        body: new FormData(form)
-      });
-      const result = await res.json();
-      if (result.status === "success") {
-        msg.style.color = "green";
-        msg.innerText = "✅ Data berhasil disimpan!";
-        form.reset();
-      } else {
-        msg.style.color = "red";
-        msg.innerText = "⚠️ Gagal: " + result.message;
-      }
-    } catch (err) {
-      msg.style.color = "red";
-      msg.innerText = "❌ Error: " + err.message;
-    }
-  });
-</script>
-
-</body>
-</html>
-
