@@ -34,7 +34,7 @@
       font-weight: bold;
       line-height: 1.4;
     }
-    /* Tulisan berjalan */
+
     .marquee {
       background: #28a745;
       color: #fff;
@@ -56,6 +56,7 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
+
     form {
       max-width: 700px;
       width: 100%;
@@ -65,7 +66,9 @@
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.12);
     }
-    .form-group { margin-bottom: 18px; }
+    .form-group {
+      margin-bottom: 18px;
+    }
     label {
       display: block;
       font-size: 14px;
@@ -81,7 +84,9 @@
       text-transform: uppercase;
       box-sizing: border-box;
     }
-    input[type="date"] { text-transform: none; }
+    input[type="date"] {
+      text-transform: none;
+    }
     button {
       width: 100%;
       padding: 14px;
@@ -94,7 +99,10 @@
       font-weight: bold;
       letter-spacing: 1px;
     }
-    button:hover { background: #218838; }
+    button:hover {
+      background: #218838;
+    }
+
     @media (max-width: 600px) {
       .header img { width: 70px; }
       .header h2 { font-size: 15px; }
@@ -135,6 +143,7 @@
         <label for="namajabatan">Nama Jabatan</label>
         <input type="text" id="namajabatan" name="namajabatan">
       </div>
+
       <div class="form-group">
         <label for="statusasn">Status ASN</label>
         <select id="statusasn" name="statusasn">
@@ -144,6 +153,7 @@
           <option value="CPNS">CPNS</option>
         </select>
       </div>
+
       <div class="form-group" id="eselonGroup">
         <label for="eselon">Eselon</label>
         <select id="eselon" name="eselon">
@@ -161,6 +171,7 @@
           <option value="VB">Eselon VB</option>
         </select>
       </div>
+
       <div class="form-group">
         <label for="golongan">Golongan</label>
         <select id="golongan" name="golongan">
@@ -176,6 +187,7 @@
           </optgroup>
         </select>
       </div>
+
       <div class="form-group">
         <label for="masakerja">Masa Kerja Golongan</label>
         <input type="text" id="masakerja" name="masakerja">
@@ -214,31 +226,44 @@
         <label for="nippasangan">NIP Pasangan</label>
         <input type="text" id="nippasangan" name="nippasangan">
       </div>
+
       <button type="submit">SIMPAN DATA</button>
     </form>
   </div>
 
   <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec";
-const form = document.getElementById("pegawaiForm");
+    const statusAsn = document.getElementById("statusasn");
+    const eselonGroup = document.getElementById("eselonGroup");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
+    function toggleEselon() {
+      if (statusAsn.value === "PNS") {
+        eselonGroup.style.display = "block";
+      } else {
+        eselonGroup.style.display = "none";
+      }
+    }
+    statusAsn.addEventListener("change", toggleEselon);
+    toggleEselon();
 
-  fetch(scriptURL, { method: "POST", body: formData })
-    .then((response) => response.json())
-    .then((data) => {
-      alert(data.message);
-      form.reset();
-    })
-    .catch((error) => {
-      alert("❌ Gagal mengirim data: " + error.message);
-      console.error(error);
+    // 🔗 Script penghubung ke Google Apps Script
+    const form = document.getElementById("pegawaiForm");
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec"; // ganti dengan URL-mu
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then((res) => res.json())
+        .then((data) => {
+          alert(data.message);
+          form.reset();
+        })
+        .catch((err) => {
+          alert("❌ Gagal mengirim data: " + err.message);
+          console.error(err);
+        });
     });
-});
-</script>
+  </script>
 </body>
 </html>
-
-
