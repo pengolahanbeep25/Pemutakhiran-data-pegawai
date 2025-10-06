@@ -95,29 +95,28 @@
     toggleEselon();
 
     // ======= GANTI scriptURL DENGAN URL WEB APP (yang muncul setelah 'Deploy as web app') =======
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec"; // <-- GANTI dengan URL web app (gunakan /exec)
-    // ========================================================================================
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec";
+  const form = document.querySelector("form");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      try {
-        const res = await fetch(scriptURL, { method: "POST", body: formData });
-        // coba parse JSON
-        const result = await res.json();
-        if (result.result === "success") {
-          alert("✅ " + result.message);
-          form.reset();
-          toggleEselon();
-        } else {
-          alert("❌ " + (result.message || 'Terjadi kesalahan'));
-        }
-      } catch (err) {
-        console.error(err);
-        alert("❌ Terjadi kesalahan koneksi: " + err.message + "\n(Lihat console network untuk detail.)");
-      }
-    });
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await response.json();
+      alert(result.message || "✅ Data berhasil disimpan!");
+      form.reset();
+    } catch (error) {
+      alert("❌ Gagal mengirim data: " + error);
+    }
+  });
   </script>
 </body>
 </html>
+
