@@ -86,37 +86,41 @@
     // tetap UI sama — tambahan script koneksi di bawah
     const statusAsn = document.getElementById("statusasn");
     const eselonGroup = document.getElementById("eselonGroup");
-    const form = document.getElementById("pegawaiForm");
 
     function toggleEselon() {
-      eselonGroup.style.display = (statusAsn.value === "PNS") ? "block" : "none";
+      if (statusAsn.value === "PNS") {
+        eselonGroup.style.display = "block";
+      } else {
+        eselonGroup.style.display = "none";
+      }
     }
     statusAsn.addEventListener("change", toggleEselon);
-    toggleEselon();
+    toggleEselon(); // cek awal
 
-    // ======= GANTI scriptURL DENGAN URL WEB APP (yang muncul setelah 'Deploy as web app') =======
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec";
-  const form = document.querySelector("form");
+    // === SCRIPT KIRIM DATA KE SPREADSHEET ===
+    const form = document.querySelector("form");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    const formData = new FormData(form);
+      const formData = new FormData(form);
 
-    try {
-      const response = await fetch(scriptURL, {
-        method: "POST",
-        body: formData
-      });
+      try {
+        // GANTI URL DI BAWAH INI DENGAN URL DEPLOY APPS SCRIPT KAMU
+        let res = await fetch("https://script.google.com/macros/s/AKfycbwRucDgSwLenBAfNycremHBCF_INCzbmhfiimAeo3_K7G_8wFriImj0fWHzB_0n_pbODw/exec", {
+          method: "POST",
+          body: formData
+        });
 
-      const result = await response.json();
-      alert(result.message || "✅ Data berhasil disimpan!");
-      form.reset();
-    } catch (error) {
-      alert("❌ Gagal mengirim data: " + error);
-    }
-  });
+        let result = await res.json();
+        alert(result.message || "✅ Data berhasil dikirim ke Spreadsheet!");
+        form.reset();
+      } catch (err) {
+        alert("❌ Gagal menyimpan data: " + err);
+      }
+    });
   </script>
 </body>
 </html>
+
 
