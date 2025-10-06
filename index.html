@@ -3,118 +3,254 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Data Pegawai</title>
+  <title>Pemutakhiran Data Pegawai</title>
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f7f8fc;
       margin: 0;
-      padding: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: url('kantor-dinas.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
-    .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    .overlay {
+      background: rgba(255, 255, 255, 0.95);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
-    h2 {
+    .header {
       text-align: center;
-      color: #333;
       margin-bottom: 20px;
     }
-    .form-group {
-      margin-bottom: 15px;
+    .header img {
+      width: 90px;
+      height: auto;
+      margin-bottom: 5px;
     }
+    .header h2 {
+      margin: 5px 0;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+    .marquee {
+      background: #28a745;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 0;
+      border-radius: 6px;
+      margin: 0 auto 20px;
+      width: 95%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    form {
+      max-width: 700px;
+      width: 100%;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+    .form-group { margin-bottom: 18px; }
     label {
       display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-      color: #444;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
     input, select {
       width: 100%;
-      padding: 10px;
+      padding: 10px 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 14px;
+      text-transform: uppercase;
+      box-sizing: border-box;
     }
+    input[type="date"] { text-transform: none; }
     button {
       width: 100%;
-      padding: 12px;
-      background: #3b82f6;
-      color: white;
+      padding: 14px;
+      background: #28a745;
       border: none;
-      border-radius: 10px;
+      color: #fff;
       font-size: 16px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-    button:hover {
-      background: #2563eb;
-    }
-    .msg {
-      text-align: center;
-      margin-top: 15px;
       font-weight: bold;
+      letter-spacing: 1px;
+    }
+    button:hover { background: #218838; }
+    @media (max-width: 600px) {
+      .header img { width: 70px; }
+      .header h2 { font-size: 15px; }
+      form { padding: 15px; }
+      input, select { font-size: 13px; padding: 9px; }
     }
   </style>
 </head>
-<body>
 
-<div class="container">
-  <h2>Form Data Pegawai</h2>
-  <form id="pegawaiForm">
-    <div class="form-group"><label>NIP Pegawai</label><input name="nip_pegawai" required></div>
-    <div class="form-group"><label>Nama Pegawai</label><input name="nama_pegawai" required></div>
-    <div class="form-group"><label>Tanggal Lahir Pegawai</label><input type="date" name="tanggal_lahir_pegawai" required></div>
-    <div class="form-group"><label>Tipe Jabatan</label><input name="tipe_jabatan"></div>
-    <div class="form-group"><label>Nama Jabatan</label><input name="nama_jabatan"></div>
-    <div class="form-group"><label>Status ASN</label>
-      <select name="status_asn" required>
-        <option value="">-- PILIH STATUS --</option>
-        <option>PNS</option><option>PPPK</option><option>CPNS</option>
-      </select>
+<body>
+  <div class="overlay">
+    <div class="header">
+      <img src="https://www.inhilkab.go.id/assets/portal/img/logos/logo-inhil-big.png" alt="Logo Indragiri Hilir">
+      <h2>DINAS PANGAN, TANAMAN PANGAN, HORTIKULTURA DAN PETERNAKAN<br>KABUPATEN INDRAGIRI HILIR</h2>
     </div>
-    <div class="form-group"><label>Eselon</label>
-      <select name="eselon">
-        <option value="">-- PILIH ESELON --</option>
-        <option>Non Eselon</option><option>IA</option><option>IB</option>
-        <option>IIA</option><option>IIB</option><option>IIIA</option>
-        <option>IIIB</option><option>IVA</option><option>IVB</option>
-      </select>
+
+    <div class="marquee">
+      <span>SELAMAT DATANG DI WEB PEMUTAKHIRAN DATA PEGAWAI DINAS PANGAN, TANAMAN PANGAN, HORTIKULTURA DAN PETERNAKAN KABUPATEN INDRAGIRI HILIR</span>
     </div>
-    <div class="form-group"><label>Golongan</label>
-      <select name="golongan">
-        <optgroup label="PNS">
-          <option>II/A</option><option>II/B</option><option>II/C</option><option>II/D</option>
-          <option>III/A</option><option>III/B</option><option>III/C</option><option>III/D</option>
-          <option>IV/A</option><option>IV/B</option><option>IV/C</option>
-        </optgroup>
-        <optgroup label="PPPK">
-          <option>V</option><option>VI</option><option>VII</option><option>VIII</option>
-          <option>IX</option><option>X</option>
-        </optgroup>
-      </select>
-    </div>
-    <div class="form-group"><label>Masa Kerja Golongan</label><input name="masa_kerja_golongan"></div>
-    <div class="form-group"><label>Status Pernikahan</label>
-      <select name="status_pernikahan">
-        <option></option><option>KAWIN</option><option>BELUM KAWIN</option><option>DUDA</option><option>JANDA</option>
-      </select>
-    </div>
-    <div class="form-group"><label>Jumlah Istri/Suami</label><input type="number" name="jumlah_istri_suami"></div>
-    <div class="form-group"><label>Jumlah Anak</label><input type="number" name="jumlah_anak"></div>
-    <div class="form-group"><label>Jumlah Tanggungan</label><input type="number" name="jumlah_tanggungan"></div>
-    <div class="form-group"><label>Pasangan PNS</label>
-      <select name="pasangan_pns"><option></option><option>YA</option><option>TIDAK</option></select>
-    </div>
-    <div class="form-group"><label>NIP Pasangan</label><input name="nip_pasangan"></div>
-    <button type="submit">Simpan Data</button>
-    <div class="msg" id="msg"></div>
-  </form>
-</div>
+
+    <form id="pegawaiForm">
+      <div class="form-group">
+        <label for="nip">NIP Pegawai</label>
+        <input type="text" id="nip" name="nip">
+      </div>
+      <div class="form-group">
+        <label for="nama">Nama Pegawai</label>
+        <input type="text" id="nama" name="nama">
+      </div>
+      <div class="form-group">
+        <label for="tgl">Tanggal Lahir Pegawai</label>
+        <input type="date" id="tgl" name="tgl">
+      </div>
+      <div class="form-group">
+        <label for="tipejabatan">Tipe Jabatan</label>
+        <input type="text" id="tipejabatan" name="tipejabatan">
+      </div>
+      <div class="form-group">
+        <label for="namajabatan">Nama Jabatan</label>
+        <input type="text" id="namajabatan" name="namajabatan">
+      </div>
+      <div class="form-group">
+        <label for="statusasn">Status ASN</label>
+        <select id="statusasn" name="statusasn">
+          <option value="">-- PILIH STATUS --</option>
+          <option value="PNS">PNS</option>
+          <option value="PPPK">PPPK</option>
+          <option value="CPNS">CPNS</option>
+        </select>
+      </div>
+      <div class="form-group" id="eselonGroup">
+        <label for="eselon">Eselon</label>
+        <select id="eselon" name="eselon">
+          <option value="">-- PILIH ESELON --</option>
+          <option value="Non Eselon">Non Eselon</option>
+          <option value="IA">Eselon IA</option>
+          <option value="IB">Eselon IB</option>
+          <option value="IIA">Eselon IIA</option>
+          <option value="IIB">Eselon IIB</option>
+          <option value="IIIA">Eselon IIIA</option>
+          <option value="IIIB">Eselon IIIB</option>
+          <option value="IVA">Eselon IVA</option>
+          <option value="IVB">Eselon IVB</option>
+          <option value="VA">Eselon VA</option>
+          <option value="VB">Eselon VB</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="golongan">Golongan</label>
+        <select id="golongan" name="golongan">
+          <option value="">-- PILIH GOLONGAN --</option>
+          <optgroup label="PNS">
+            <option>II/A</option><option>II/B</option><option>II/C</option><option>II/D</option>
+            <option>III/A</option><option>III/B</option><option>III/C</option><option>III/D</option>
+            <option>IV/A</option><option>IV/B</option><option>IV/C</option>
+          </optgroup>
+          <optgroup label="PPPK">
+            <option>V</option><option>VI</option><option>VII</option><option>VIII</option>
+            <option>IX</option><option>X</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="masakerja">Masa Kerja Golongan</label>
+        <input type="text" id="masakerja" name="masakerja">
+      </div>
+      <div class="form-group">
+        <label for="statusnikah">Status Pernikahan</label>
+        <select id="statusnikah" name="statusnikah">
+          <option></option>
+          <option>KAWIN</option>
+          <option>BELUM KAWIN</option>
+          <option>DUDA</option>
+          <option>JANDA</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="istri">Jumlah Istri/Suami</label>
+        <input type="number" id="istri" name="istri" min="0">
+      </div>
+      <div class="form-group">
+        <label for="anak">Jumlah Anak</label>
+        <input type="number" id="anak" name="anak" min="0">
+      </div>
+      <div class="form-group">
+        <label for="tanggungan">Jumlah Tanggungan</label>
+        <input type="number" id="tanggungan" name="tanggungan" min="0">
+      </div>
+      <div class="form-group">
+        <label for="pasanganpns">Pasangan PNS</label>
+        <select id="pasanganpns" name="pasanganpns">
+          <option value=""></option>
+          <option value="YA">YA</option>
+          <option value="TIDAK">TIDAK</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="nippasangan">NIP Pasangan</label>
+        <input type="text" id="nippasangan" name="nippasangan">
+      </div>
+      <button type="submit">SIMPAN DATA</button>
+    </form>
+  </div>
+
+  <script>
+    // Tampilkan / sembunyikan eselon
+    const statusAsn = document.getElementById("statusasn");
+    const eselonGroup = document.getElementById("eselonGroup");
+    function toggleEselon() {
+      eselonGroup.style.display = (statusAsn.value === "PNS") ? "block" : "none";
+    }
+    statusAsn.addEventListener("change", toggleEselon);
+    toggleEselon();
+
+    // === KONEKSI KE GOOGLE APPS SCRIPT ===
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec";
+    const form = document.getElementById("pegawaiForm");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: "POST", body: new FormData(form) })
+        .then(res => res.json())
+        .then(data => {
+          if (data.result === "success") {
+            alert("✅ Data berhasil disimpan ke Spreadsheet!");
+            form.reset();
+            toggleEselon();
+          } else {
+            alert("⚠️ Gagal menyimpan: " + data.message);
+          }
+        })
+        .catch(err => alert("❌ Terjadi kesalahan: " + err.message));
+    });
+  </script>
+</body>
+</html>
+
 
 <script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec';
@@ -149,3 +285,4 @@
 
 </body>
 </html>
+
