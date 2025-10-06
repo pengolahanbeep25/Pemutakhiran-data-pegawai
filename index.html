@@ -219,29 +219,26 @@
   </div>
 
   <script>
-    const statusAsn = document.getElementById("statusasn");
-    const eselonGroup = document.getElementById("eselonGroup");
-    function toggleEselon() {
-      if (statusAsn.value === "PNS") eselonGroup.style.display = "block";
-      else eselonGroup.style.display = "none";
-    }
-    statusAsn.addEventListener("change", toggleEselon);
-    toggleEselon();
+const scriptURL = "https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec";
+const form = document.getElementById("pegawaiForm");
 
-    const form = document.getElementById("pegawaiForm");
-    const scriptURL = "https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec";
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      fetch(scriptURL, { method: "POST", body: formData, mode: "no-cors" })
-  .then(() => {
-    alert("✅ Data berhasil disimpan!");
-    form.reset();
-  })
-  .catch((error) => alert("❌ Terjadi kesalahan: " + error.message));
+  fetch(scriptURL, { method: "POST", body: formData })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
+      form.reset();
+    })
+    .catch((error) => {
+      alert("❌ Gagal mengirim data: " + error.message);
+      console.error(error);
     });
-  </script>
+});
+</script>
 </body>
 </html>
+
 
