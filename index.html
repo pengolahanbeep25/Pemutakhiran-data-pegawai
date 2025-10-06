@@ -35,6 +35,7 @@
       line-height: 1.4;
     }
 
+    /* Tulisan berjalan */
     .marquee {
       background: #28a745;
       color: #fff;
@@ -118,11 +119,12 @@
       <h2>DINAS PANGAN, TANAMAN PANGAN, HORTIKULTURA DAN PETERNAKAN<br>KABUPATEN INDRAGIRI HILIR</h2>
     </div>
 
+    <!-- Tulisan berjalan -->
     <div class="marquee">
       <span>SELAMAT DATANG DI WEB PEMUTAKHIRAN DATA PEGAWAI DINAS PANGAN, TANAMAN PANGAN, HORTIKULTURA DAN PETERNAKAN KABUPATEN INDRAGIRI HILIR</span>
     </div>
 
-    <form id="pegawaiForm">
+    <form>
       <div class="form-group">
         <label for="nip">NIP Pegawai</label>
         <input type="text" id="nip" name="nip">
@@ -242,8 +244,9 @@
         eselonGroup.style.display = "none";
       }
     }
+
     statusAsn.addEventListener("change", toggleEselon);
-    toggleEselon();
+    toggleEselon(); // cek awal
 
     // 🔗 Script penghubung ke Google Apps Script
     const form = document.getElementById("pegawaiForm");
@@ -272,5 +275,6 @@
   </script>
 </body>
 </html>
+
 
 
