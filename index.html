@@ -68,7 +68,7 @@
   <form id="pegawaiForm">
     <div class="form-group"><label>NIP Pegawai</label><input name="nip_pegawai" required></div>
     <div class="form-group"><label>Nama Pegawai</label><input name="nama_pegawai" required></div>
-    <div class="form-group"><label>Tanggal Lahir</label><input type="date" name="tanggal_lahir_pegawai" required></div>
+    <div class="form-group"><label>Tanggal Lahir Pegawai</label><input type="date" name="tanggal_lahir_pegawai" required></div>
     <div class="form-group"><label>Tipe Jabatan</label><input name="tipe_jabatan"></div>
     <div class="form-group"><label>Nama Jabatan</label><input name="nama_jabatan"></div>
     <div class="form-group"><label>Status ASN</label>
@@ -117,14 +117,14 @@
 </div>
 
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec'; // ganti dengan URL Web App dari Apps Script
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyG9rzFoPd7HFpZxjIPyTVQ9CFIvqJl2heQjzQrcOpRmYdyCpN0AhHNTlDN2MTf1Kmz/exec';
 
   document.getElementById("pegawaiForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target;
     const msg = document.getElementById("msg");
 
-    msg.innerText = "Menyimpan data...";
+    msg.innerText = "⏳ Menyimpan data...";
 
     try {
       const res = await fetch(SCRIPT_URL, {
@@ -138,7 +138,7 @@
         form.reset();
       } else {
         msg.style.color = "red";
-        msg.innerText = "❌ Gagal: " + result.message;
+        msg.innerText = "⚠️ Gagal: " + result.message;
       }
     } catch (err) {
       msg.style.color = "red";
@@ -149,5 +149,3 @@
 
 </body>
 </html>
-
-
