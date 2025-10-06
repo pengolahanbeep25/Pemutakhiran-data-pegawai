@@ -166,31 +166,37 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxc2yamygyFCF3OyF_97d-yIz37HGUNaQqUaNdfxQE1EBFudApPR6By_bPGlpyq08oD/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4vAR48h7p-HZxDI0ABN4f5nqADmA_EmuKZD179z9qcUj1j6AGZzdIU9ZeP-mcGtY/exec";
 
-    const form = document.getElementById("pegawaiForm");
-    const statusAsn = document.getElementById("statusasn");
-    const eselonGroup = document.getElementById("eselonGroup");
+  const form = document.getElementById("pegawaiForm");
+  const statusAsn = document.getElementById("statusasn");
+  const eselonGroup = document.getElementById("eselonGroup");
 
-    function toggleEselon() {
-      eselonGroup.style.display = (statusAsn.value === "PNS") ? "block" : "none";
-    }
-    statusAsn.addEventListener("change", toggleEselon);
-    toggleEselon();
+  function toggleEselon() {
+    eselonGroup.style.display = (statusAsn.value === "PNS") ? "block" : "none";
+  }
+  statusAsn.addEventListener("change", toggleEselon);
+  toggleEselon();
 
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      fetch(SCRIPT_URL, { method: "POST", body: new FormData(form)})
-        .then(() => {
-          alert("✅ Data berhasil disimpan!");
-          form.reset();
-          toggleEselon();
-        })
-        .catch(err => alert("❌ Gagal menyimpan: " + err.message));
-    });
-  </script>
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: new FormData(form)
+    })
+    .then(() => {
+      alert("✅ Data berhasil disimpan!");
+      form.reset();
+      toggleEselon();
+    })
+    .catch(err => alert("❌ Gagal menyimpan: " + err.message));
+  });
+</script>
 </body>
 </html>
+
 
 
 
