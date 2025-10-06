@@ -123,7 +123,7 @@
       <div class="form-group"><label>Nama Jabatan</label><input name="Nama Jabatan"></div>
       <div class="form-group">
         <label>Status ASN</label>
-        <select name="Status ASN" id="statusasn">
+        <select name="Status ASN" id="statusasn" required>
           <option value="">-- PILIH STATUS --</option>
           <option>PNS</option><option>PPPK</option><option>CPNS</option>
         </select>
@@ -180,23 +180,19 @@
 
   form.addEventListener("submit", e => {
     e.preventDefault();
+    const formData = new FormData(form);
 
     fetch(SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors",
-      body: new FormData(form)
+      body: formData
     })
-    .then(() => {
+    .then(response => {
       alert("✅ Data berhasil disimpan!");
       form.reset();
       toggleEselon();
     })
-    .catch(err => alert("❌ Gagal menyimpan: " + err.message));
+    .catch(error => alert("❌ Gagal menyimpan data: " + error.message));
   });
-</script>
+  </script>
 </body>
 </html>
-
-
-
-
