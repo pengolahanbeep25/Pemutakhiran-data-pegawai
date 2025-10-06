@@ -34,8 +34,6 @@
       font-weight: bold;
       line-height: 1.4;
     }
-
-    /* Tulisan berjalan */
     .marquee {
       background: #28a745;
       color: #fff;
@@ -57,7 +55,6 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-
     form {
       max-width: 700px;
       width: 100%;
@@ -103,7 +100,6 @@
     button:hover {
       background: #218838;
     }
-
     @media (max-width: 600px) {
       .header img { width: 70px; }
       .header h2 { font-size: 15px; }
@@ -119,19 +115,19 @@
       <h2>DINAS PANGAN, TANAMAN PANGAN, HORTIKULTURA DAN PETERNAKAN<br>KABUPATEN INDRAGIRI HILIR</h2>
     </div>
 
-    <!-- Tulisan berjalan -->
     <div class="marquee">
       <span>SELAMAT DATANG DI WEB PEMUTAKHIRAN DATA PEGAWAI DINAS PANGAN, TANAMAN PANGAN, HORTIKULTURA DAN PETERNAKAN KABUPATEN INDRAGIRI HILIR</span>
     </div>
 
-    <form>
+    <!-- 🧾 FORM -->
+    <form id="pegawaiForm">
       <div class="form-group">
         <label for="nip">NIP Pegawai</label>
-        <input type="text" id="nip" name="nip">
+        <input type="text" id="nip" name="nip" required>
       </div>
       <div class="form-group">
         <label for="nama">Nama Pegawai</label>
-        <input type="text" id="nama" name="nama">
+        <input type="text" id="nama" name="nama" required>
       </div>
       <div class="form-group">
         <label for="tgl">Tanggal Lahir Pegawai</label>
@@ -145,10 +141,9 @@
         <label for="namajabatan">Nama Jabatan</label>
         <input type="text" id="namajabatan" name="namajabatan">
       </div>
-
       <div class="form-group">
         <label for="statusasn">Status ASN</label>
-        <select id="statusasn" name="statusasn">
+        <select id="statusasn" name="statusasn" required>
           <option value="">-- PILIH STATUS --</option>
           <option value="PNS">PNS</option>
           <option value="PPPK">PPPK</option>
@@ -236,50 +231,32 @@
   <script>
     const statusAsn = document.getElementById("statusasn");
     const eselonGroup = document.getElementById("eselonGroup");
+    const form = document.getElementById("pegawaiForm");
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec";
 
     function toggleEselon() {
-      if (statusAsn.value === "PNS") {
-        eselonGroup.style.display = "block";
-      } else {
-        eselonGroup.style.display = "none";
-      }
+      eselonGroup.style.display = (statusAsn.value === "PNS") ? "block" : "none";
     }
-
     statusAsn.addEventListener("change", toggleEselon);
-    toggleEselon(); // cek awal
+    toggleEselon();
 
-    // 🔗 Script penghubung ke Google Apps Script
-    const form = document.getElementById("pegawaiForm");
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzv47YzO3eaIUzi_w44RO12EKc_hQEZFrjM4HcwAyqN7RlKevlXos6ctHH-YMvkyP6M/exec"; // URL Web App dari Apps Script kamu
-const form = document.getElementById("pegawaiForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault(); // biar gak refresh halaman
-
-  const formData = new FormData(form);
-
-  try {
-    const response = await fetch(scriptURL, {
-      method: "POST",
-      body: formData,
+      try {
+        const response = await fetch(scriptURL, { method: "POST", body: formData });
+        const result = await response.json();
+        if (result.result === "success") {
+          alert("✅ " + result.message);
+          form.reset();
+        } else {
+          alert("❌ " + result.message);
+        }
+      } catch (err) {
+        alert("❌ Terjadi kesalahan koneksi: " + err.message);
+      }
     });
-
-    const result = await response.json();
-
-    if (result.result === "success") {
-      alert("✅ " + result.message);
-      form.reset(); // kosongkan form setelah sukses
-    } else {
-      alert("❌ " + result.message);
-    }
-  } catch (err) {
-    alert("❌ Terjadi kesalahan: " + err.message);
-  }
-});
   </script>
 </body>
 </html>
-
-
-
-
