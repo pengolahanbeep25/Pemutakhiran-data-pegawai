@@ -64,9 +64,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.12);
     }
-    .form-group {
-      margin-bottom: 18px;
-    }
+    .form-group { margin-bottom: 18px; }
     label {
       display: block;
       font-size: 14px;
@@ -116,21 +114,21 @@
     </div>
 
     <form id="pegawaiForm">
-      <div class="form-group"><label>NIP Pegawai</label><input name="NIP Pegawai" required></div>
-      <div class="form-group"><label>Nama Pegawai</label><input name="Nama Pegawai" required></div>
-      <div class="form-group"><label>Tanggal Lahir Pegawai</label><input type="date" name="Tanggal Lahir Pegawai"></div>
-      <div class="form-group"><label>Tipe Jabatan</label><input name="Tipe Jabatan"></div>
-      <div class="form-group"><label>Nama Jabatan</label><input name="Nama Jabatan"></div>
+      <div class="form-group"><label>NIP Pegawai</label><input name="nip_pegawai" required></div>
+      <div class="form-group"><label>Nama Pegawai</label><input name="nama_pegawai" required></div>
+      <div class="form-group"><label>Tanggal Lahir Pegawai</label><input type="date" name="tgl_lahir"></div>
+      <div class="form-group"><label>Tipe Jabatan</label><input name="tipe_jabatan"></div>
+      <div class="form-group"><label>Nama Jabatan</label><input name="nama_jabatan"></div>
       <div class="form-group">
         <label>Status ASN</label>
-        <select name="Status ASN" id="statusasn" required>
+        <select name="status_asn" id="statusasn" required>
           <option value="">-- PILIH STATUS --</option>
           <option>PNS</option><option>PPPK</option><option>CPNS</option>
         </select>
       </div>
       <div class="form-group" id="eselonGroup">
         <label>Eselon</label>
-        <select name="Eselon">
+        <select name="eselon">
           <option value="">-- PILIH ESELON --</option>
           <option>Non Eselon</option><option>IA</option><option>IB</option>
           <option>IIA</option><option>IIB</option><option>IIIA</option>
@@ -140,7 +138,7 @@
       </div>
       <div class="form-group">
         <label>Golongan</label>
-        <select name="Golongan">
+        <select name="golongan">
           <optgroup label="PNS">
             <option>II/A</option><option>II/B</option><option>II/C</option><option>II/D</option>
             <option>III/A</option><option>III/B</option><option>III/C</option><option>III/D</option>
@@ -152,15 +150,15 @@
           </optgroup>
         </select>
       </div>
-      <div class="form-group"><label>Masa Kerja Golongan</label><input name="Masa Kerja Golongan"></div>
+      <div class="form-group"><label>Masa Kerja Golongan</label><input name="masa_kerja"></div>
       <div class="form-group"><label>Status Pernikahan</label>
-        <select name="Status Pernikahan"><option></option><option>KAWIN</option><option>BELUM KAWIN</option><option>DUDA</option><option>JANDA</option></select>
+        <select name="status_nikah"><option></option><option>KAWIN</option><option>BELUM KAWIN</option><option>DUDA</option><option>JANDA</option></select>
       </div>
-      <div class="form-group"><label>Jumlah Istri/Suami</label><input type="number" name="Jumlah Istri/Suami"></div>
-      <div class="form-group"><label>Jumlah Anak</label><input type="number" name="Jumlah Anak"></div>
-      <div class="form-group"><label>Jumlah Tanggungan</label><input type="number" name="Jumlah Tanggungan"></div>
-      <div class="form-group"><label>Pasangan PNS</label><select name="Pasangan PNS"><option></option><option>YA</option><option>TIDAK</option></select></div>
-      <div class="form-group"><label>NIP Pasangan</label><input name="NIP Pasangan"></div>
+      <div class="form-group"><label>Jumlah Istri/Suami</label><input type="number" name="jumlah_pasangan"></div>
+      <div class="form-group"><label>Jumlah Anak</label><input type="number" name="jumlah_anak"></div>
+      <div class="form-group"><label>Jumlah Tanggungan</label><input type="number" name="jumlah_tanggungan"></div>
+      <div class="form-group"><label>Pasangan PNS</label><select name="pasangan_pns"><option></option><option>YA</option><option>TIDAK</option></select></div>
+      <div class="form-group"><label>NIP Pasangan</label><input name="nip_pasangan"></div>
       <button type="submit">SIMPAN DATA</button>
     </form>
   </div>
@@ -202,5 +200,3 @@ form.addEventListener("submit", async e => {
 </script>
 </body>
 </html>
-
-
